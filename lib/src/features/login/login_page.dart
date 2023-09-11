@@ -62,14 +62,57 @@ class _LoginPageState extends State<LoginPage> {
               margin: const EdgeInsets.symmetric(horizontal: 30),
               height: 30,
               alignment: Alignment.center,
-              child: TextField(
+              child: const TextField(
                 decoration: InputDecoration(
-                  prefixIcon: Icon(Icons.person, color: Colors.red),
+                  contentPadding: EdgeInsets.only(top: 0),
+                  enabledBorder: UnderlineInputBorder(
+                    borderSide: BorderSide(
+                      color: Color.fromARGB(255, 141, 79, 151),
+                    ),
+                  ),
+                  focusedBorder: UnderlineInputBorder(
+                    borderSide: BorderSide(
+                      color: Color.fromARGB(255, 141, 79, 151),
+                    ),
+                  ),
+                  hintText: 'Senha',
+                  hintStyle: TextStyle(color: Colors.white),
+                  prefixIcon: Icon(
+                    Icons.person,
+                    color: Color.fromARGB(255, 141, 79, 151),
+                  ),
                 ),
               ),
             ),
             const SizedBox(
               height: 30,
+            ),
+            Container(
+              width: double.infinity,
+              margin: const EdgeInsets.symmetric(horizontal: 30),
+              height: 30,
+              alignment: Alignment.center,
+              child: const TextField(
+                decoration: InputDecoration(
+                  contentPadding: EdgeInsets.only(top: 0),
+                  enabledBorder: UnderlineInputBorder(
+                    borderSide: BorderSide(
+                      color: Color.fromARGB(255, 141, 79, 151),
+                    ),
+                  ),
+                  focusedBorder: UnderlineInputBorder(
+                    borderSide: BorderSide(
+                      color: Color.fromARGB(255, 141, 79, 151),
+                    ),
+                  ),
+                  hintText: 'Senha',
+                  hintStyle: TextStyle(color: Colors.white),
+                  prefixIcon: Icon(
+                    Icons.lock,
+                    color: Color.fromARGB(255, 141, 79, 151),
+                  ),
+                ),
+              ),
             ),
             SizedBox(
               width: double.infinity,
