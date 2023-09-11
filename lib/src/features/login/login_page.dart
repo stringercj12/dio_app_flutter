@@ -59,6 +59,14 @@ class _LoginPageState extends State<LoginPage> {
             ),
             Container(
               width: double.infinity,
+              margin: const EdgeInsets.symmetric(horizontal: 30),
+              height: 30,
+              alignment: Alignment.center,
+              child: TextField(
+                decoration: InputDecoration(
+                  prefixIcon: Icon(Icons.person, color: Colors.red),
+                ),
+              ),
             ),
             const SizedBox(
               height: 30,
