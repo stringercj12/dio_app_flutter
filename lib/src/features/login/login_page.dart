@@ -8,8 +8,8 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
-  TextEditingController emailController = TextEditingController();
-  TextEditingController senhaController = TextEditingController();
+  TextEditingController emailController = TextEditingController(text: '');
+  TextEditingController senhaController = TextEditingController(text: '');
   bool isObscureText = true;
 
   @override
@@ -151,13 +151,25 @@ class _LoginPageState extends State<LoginPage> {
                   height: 30,
                 ),
                 Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 26),
+                  padding: const EdgeInsets.symmetric(horizontal: 30),
                   child: SizedBox(
                     width: double.infinity,
                     child: TextButton(
                       onPressed: () {
-                        debugPrint(emailController.text);
-                        debugPrint(senhaController.text);
+                        if (emailController.text.trim() == 'email@email.com' &&
+                            senhaController.text.trim() == '123') {
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            const SnackBar(
+                              content: Text('Login efetuado com sucesso'),
+                            ),
+                          );
+                        } else {
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            const SnackBar(
+                              content: Text('Erro ao efetuar o login'),
+                            ),
+                          );
+                        }
                       },
                       style: ButtonStyle(
                         shape: MaterialStateProperty.all(
