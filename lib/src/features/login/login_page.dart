@@ -159,7 +159,7 @@ class _LoginPageState extends State<LoginPage> {
                       onPressed: () {
                         if (emailController.text.trim() == 'email@email.com' &&
                             senhaController.text.trim() == '123') {
-                          Navigator.push(
+                          Navigator.pushReplacement(
                             context,
                             MaterialPageRoute(
                               builder: ((context) => const HomePage()),
