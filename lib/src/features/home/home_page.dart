@@ -12,6 +12,9 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  PageController pageController = PageController(initialPage: 0);
+  int posicaoPagina = 0;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -66,6 +69,12 @@ class _HomePageState extends State<HomePage> {
         children: [
           Expanded(
             child: PageView(
+              controller: pageController,
+              onPageChanged: (value) {
+                setState(() {
+                  posicaoPagina = value;
+                });
+              },
               children: const [
                 Pagina1Page(),
                 Pagina2Page(),
@@ -73,6 +82,17 @@ class _HomePageState extends State<HomePage> {
               ],
             ),
           ),
+          BottomNavigationBar(
+            onTap: (value) {
+              pageController.jumpToPage(value);
+            },
+            currentIndex: posicaoPagina,
+            items: const [
+              BottomNavigationBarItem(label: 'Pag1', icon: Icon(Icons.home)),
+              BottomNavigationBarItem(label: 'Pag2', icon: Icon(Icons.add)),
+              BottomNavigationBarItem(label: 'Pag3', icon: Icon(Icons.person)),
+            ],
+          )
         ],
       ),
     );
