@@ -8,6 +8,10 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
+  String email = '';
+  String senha = '';
+  bool isObscureText = true;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -61,16 +65,22 @@ class _LoginPageState extends State<LoginPage> {
                     color: Colors.white,
                   ),
                 ),
+                const SizedBox(
+                  height: 40,
+                ),
                 Container(
                   width: double.infinity,
                   margin: const EdgeInsets.symmetric(horizontal: 30),
                   height: 30,
                   alignment: Alignment.center,
-                  child: const TextField(
-                    style: TextStyle(
+                  child: TextField(
+                    onChanged: (value) {
+                      email = value;
+                    },
+                    style: const TextStyle(
                       color: Colors.white,
                     ),
-                    decoration: InputDecoration(
+                    decoration: const InputDecoration(
                       contentPadding: EdgeInsets.only(top: 0),
                       enabledBorder: UnderlineInputBorder(
                         borderSide: BorderSide(
@@ -82,7 +92,7 @@ class _LoginPageState extends State<LoginPage> {
                           color: Color.fromARGB(255, 141, 79, 151),
                         ),
                       ),
-                      hintText: 'Senha',
+                      hintText: 'E-mail',
                       hintStyle: TextStyle(color: Colors.white),
                       prefixIcon: Icon(
                         Icons.person,
@@ -99,51 +109,77 @@ class _LoginPageState extends State<LoginPage> {
                   margin: const EdgeInsets.symmetric(horizontal: 30),
                   height: 30,
                   alignment: Alignment.center,
-                  child: const TextField(
-                    style: TextStyle(
+                  child: TextField(
+                    obscureText: isObscureText,
+                    onChanged: (value) {
+                      senha = value;
+                    },
+                    style: const TextStyle(
                       color: Colors.white,
                     ),
                     decoration: InputDecoration(
-                      contentPadding: EdgeInsets.only(top: 0),
-                      enabledBorder: UnderlineInputBorder(
+                      contentPadding: const EdgeInsets.only(top: 0),
+                      enabledBorder: const UnderlineInputBorder(
                         borderSide: BorderSide(
                           color: Color.fromARGB(255, 141, 79, 151),
                         ),
                       ),
-                      focusedBorder: UnderlineInputBorder(
+                      focusedBorder: const UnderlineInputBorder(
                         borderSide: BorderSide(
                           color: Color.fromARGB(255, 141, 79, 151),
                         ),
                       ),
                       hintText: 'Senha',
-                      hintStyle: TextStyle(color: Colors.white),
-                      prefixIcon: Icon(
+                      hintStyle: const TextStyle(color: Colors.white),
+                      prefixIcon: const Icon(
                         Icons.lock,
                         color: Color.fromARGB(255, 141, 79, 151),
+                      ),
+                      suffixIcon: InkWell(
+                        onTap: () {
+                          setState(() {
+                            isObscureText = !isObscureText;
+                          });
+                        },
+                        child: Icon(
+                          isObscureText
+                              ? Icons.visibility_off
+                              : Icons.visibility,
+                          color: const Color.fromARGB(255, 141, 79, 151),
+                        ),
                       ),
                     ),
                   ),
                 ),
-                SizedBox(
-                  width: double.infinity,
-                  child: TextButton(
-                    onPressed: () {},
-                    style: ButtonStyle(
-                      shape: MaterialStateProperty.all(
-                        RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(10),
+                const SizedBox(
+                  height: 30,
+                ),
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 26),
+                  child: SizedBox(
+                    width: double.infinity,
+                    child: TextButton(
+                      onPressed: () {
+                        print(email);
+                        print(senha);
+                      },
+                      style: ButtonStyle(
+                        shape: MaterialStateProperty.all(
+                          RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(10),
+                          ),
+                        ),
+                        backgroundColor: MaterialStateProperty.all(
+                          const Color.fromARGB(255, 90, 16, 101),
                         ),
                       ),
-                      backgroundColor: MaterialStateProperty.all(
-                        const Color.fromARGB(255, 90, 16, 101),
-                      ),
-                    ),
-                    child: const Text(
-                      'Entrar',
-                      style: TextStyle(
-                        fontSize: 18,
-                        fontWeight: FontWeight.w700,
-                        color: Colors.white,
+                      child: const Text(
+                        'Entrar',
+                        style: TextStyle(
+                          fontSize: 18,
+                          fontWeight: FontWeight.w700,
+                          color: Colors.white,
+                        ),
                       ),
                     ),
                   ),
