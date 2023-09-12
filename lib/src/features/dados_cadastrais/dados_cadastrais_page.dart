@@ -9,6 +9,18 @@ class DadosCadastraisPage extends StatefulWidget {
 
 class _DadosCadastraisPageState extends State<DadosCadastraisPage> {
   TextEditingController nomeController = TextEditingController(text: '');
+  TextEditingController dataNascimentoController =
+      TextEditingController(text: '');
+
+  Text returnText(String texto) {
+    return Text(
+      texto,
+      style: const TextStyle(
+        fontSize: 16,
+        fontWeight: FontWeight.w500,
+      ),
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -21,15 +33,29 @@ class _DadosCadastraisPageState extends State<DadosCadastraisPage> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const Text(
-                'Nome',
-                style: TextStyle(
-                  fontSize: 16,
-                  fontWeight: FontWeight.w500,
-                ),
-              ),
+              returnText('Nome'),
               TextField(
                 controller: nomeController,
+              ),
+              const SizedBox(
+                height: 10,
+              ),
+              returnText('Data de nascimento'),
+              TextField(
+                readOnly: true,
+                controller: dataNascimentoController,
+                onTap: () async {
+                  var data = await showDatePicker(
+                    context: context,
+                    initialDate: DateTime(2000, 1, 1),
+                    firstDate: DateTime(1900, 1, 1),
+                    lastDate: DateTime(2045, 12, 1),
+                  );
+
+                  if (data != null) {
+                    dataNascimentoController.text = data.toString();
+                  }
+                },
               ),
               TextButton(
                 onPressed: () {},
