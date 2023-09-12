@@ -1,3 +1,7 @@
+import 'package:dio_app_flutter/src/features/dados_cadastrais/dados_cadastrais_page.dart';
+import 'package:dio_app_flutter/src/features/pagina1.dart';
+import 'package:dio_app_flutter/src/features/pagina2.dart';
+import 'package:dio_app_flutter/src/features/pagina3.dart';
 import 'package:flutter/material.dart';
 
 class HomePage extends StatefulWidget {
@@ -24,7 +28,15 @@ class _HomePageState extends State<HomePage> {
                   width: double.infinity,
                   child: const Text('Dados Cadastrais'),
                 ),
-                onTap: () {},
+                onTap: () {
+                  Navigator.pop(context);
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => const DadosCadastraisPage(),
+                    ),
+                  );
+                },
               ),
               const Divider(),
               const SizedBox(height: 30),
@@ -49,6 +61,19 @@ class _HomePageState extends State<HomePage> {
             ],
           ),
         ),
+      ),
+      body: Column(
+        children: [
+          Expanded(
+            child: PageView(
+              children: const [
+                Pagina1Page(),
+                Pagina2Page(),
+                Pagina3Page(),
+              ],
+            ),
+          ),
+        ],
       ),
     );
   }
