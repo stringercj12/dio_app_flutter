@@ -21,8 +21,9 @@ class _LoginPageState extends State<LoginPage> {
         width: double.infinity,
         child: SingleChildScrollView(
           child: ConstrainedBox(
-            constraints:
-                BoxConstraints(maxHeight: MediaQuery.of(context).size.height),
+            constraints: BoxConstraints(
+              maxHeight: MediaQuery.of(context).size.height,
+            ),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
