@@ -1,7 +1,8 @@
+import 'package:dio_app_flutter/src/repositories/linguagens_repository.dart';
 import 'package:dio_app_flutter/src/repositories/nivel_repository.dart';
 import 'package:flutter/material.dart';
 
-import '../../hared/widgets/textlabel_.dart';
+import '../../shared/widgets/textlabel_.dart';
 
 class DadosCadastraisPage extends StatefulWidget {
   const DadosCadastraisPage({super.key});
@@ -15,12 +16,16 @@ class _DadosCadastraisPageState extends State<DadosCadastraisPage> {
   var dataNascimentoController = TextEditingController(text: '');
   DateTime? dataNascimento;
   var nivelRepository = NivelRepository();
+  var linguagemRepository = LinguagensRepository();
   var niveis = [];
+  var linguagens = [];
+  var linguagensSelecionadas = [];
   var nivelSelecionado = "";
 
   @override
   void initState() {
     niveis = nivelRepository.retornaNiveis();
+    linguagens = linguagemRepository.retornaLinguagens();
     super.initState();
   }
 
@@ -32,8 +37,7 @@ class _DadosCadastraisPageState extends State<DadosCadastraisPage> {
         ),
         body: Padding(
           padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 16),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
+          child: ListView(
             children: [
               const TextLabel(texto: 'Nome'),
               TextField(
@@ -72,6 +76,29 @@ class _DadosCadastraisPageState extends State<DadosCadastraisPage> {
                             nivelSelecionado = value.toString();
                           });
                           debugPrint(value.toString());
+                        },
+                      ),
+                    )
+                    .toList(),
+              ),
+              const TextLabel(texto: 'Linguagens preferidas'),
+              Column(
+                children: linguagens
+                    .map(
+                      (linguagem) => CheckboxListTile(
+                        dense: true,
+                        title: Text(linguagem),
+                        value: linguagensSelecionadas.contains(linguagem),
+                        onChanged: (bool? value) {
+                          if (value!) {
+                            setState(() {
+                              linguagensSelecionadas.add(linguagem);
+                            });
+                          } else {
+                            setState(() {
+                              linguagensSelecionadas.remove(linguagem);
+                            });
+                          }
                         },
                       ),
                     )
