@@ -21,6 +21,8 @@ class _DadosCadastraisPageState extends State<DadosCadastraisPage> {
   var linguagens = [];
   var linguagensSelecionadas = [];
   var nivelSelecionado = "";
+  double salarioEscolhido = 0;
+  int tempoExperiencia = 0;
 
   @override
   void initState() {
@@ -104,6 +106,19 @@ class _DadosCadastraisPageState extends State<DadosCadastraisPage> {
                     )
                     .toList(),
               ),
+              TextLabel(
+                texto:
+                    'Pretenção salarial R\$ ${salarioEscolhido.round().toString()}',
+              ),
+              Slider(
+                  min: 0,
+                  max: 10000,
+                  value: salarioEscolhido,
+                  onChanged: (double value) {
+                    setState(() {
+                      salarioEscolhido = value;
+                    });
+                  }),
               TextButton(
                 onPressed: () {
                   debugPrint(nomeController.text);
