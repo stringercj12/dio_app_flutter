@@ -1,4 +1,7 @@
+import 'package:dio_app_flutter/src/repositories/nivel_repository.dart';
 import 'package:flutter/material.dart';
+
+import '../../hared/widgets/textlabel_.dart';
 
 class DadosCadastraisPage extends StatefulWidget {
   const DadosCadastraisPage({super.key});
@@ -8,18 +11,17 @@ class DadosCadastraisPage extends StatefulWidget {
 }
 
 class _DadosCadastraisPageState extends State<DadosCadastraisPage> {
-  TextEditingController nomeController = TextEditingController(text: '');
-  TextEditingController dataNascimentoController =
-      TextEditingController(text: '');
+  var nomeController = TextEditingController(text: '');
+  var dataNascimentoController = TextEditingController(text: '');
+  DateTime? dataNascimento;
+  var nivelRepository = NivelRepository();
+  var niveis = [];
+  var nivelSelecionado = "";
 
-  Text returnText(String texto) {
-    return Text(
-      texto,
-      style: const TextStyle(
-        fontSize: 16,
-        fontWeight: FontWeight.w500,
-      ),
-    );
+  @override
+  void initState() {
+    niveis = nivelRepository.retornaNiveis();
+    super.initState();
   }
 
   @override
@@ -33,14 +35,11 @@ class _DadosCadastraisPageState extends State<DadosCadastraisPage> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              returnText('Nome'),
+              const TextLabel(texto: 'Nome'),
               TextField(
                 controller: nomeController,
               ),
-              const SizedBox(
-                height: 10,
-              ),
-              returnText('Data de nascimento'),
+              const TextLabel(texto: 'Data de nascimento'),
               TextField(
                 readOnly: true,
                 controller: dataNascimentoController,
@@ -54,11 +53,35 @@ class _DadosCadastraisPageState extends State<DadosCadastraisPage> {
 
                   if (data != null) {
                     dataNascimentoController.text = data.toString();
+                    dataNascimento = data;
                   }
                 },
               ),
+              const TextLabel(texto: 'Nivel de experiência'),
+              Column(
+                children: niveis
+                    .map(
+                      (nivel) => RadioListTile(
+                        dense: true,
+                        title: Text(nivel.toString()),
+                        value: nivel.toString(),
+                        selected: nivelSelecionado == nivel,
+                        groupValue: nivelSelecionado,
+                        onChanged: (value) {
+                          setState(() {
+                            nivelSelecionado = value.toString();
+                          });
+                          debugPrint(value.toString());
+                        },
+                      ),
+                    )
+                    .toList(),
+              ),
               TextButton(
-                onPressed: () {},
+                onPressed: () {
+                  debugPrint(nomeController.text);
+                  debugPrint(dataNascimento.toString());
+                },
                 child: const Text('Salvar'),
               ),
             ],
