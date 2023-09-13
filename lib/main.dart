@@ -1,4 +1,5 @@
 import 'package:dio_app_flutter/src/features/dados_cadastrais/dados_cadastrais_page.dart';
+import 'package:dio_app_flutter/src/features/home/home_page.dart';
 import 'package:dio_app_flutter/src/features/login/login_page.dart';
 import 'package:flutter/material.dart';
 
@@ -20,7 +21,7 @@ class MyApp extends StatelessWidget {
         // textTheme: Google,
         useMaterial3: true,
       ),
-      home: const DadosCadastraisPage(),
+      home: const HomePage(),
     );
   }
 }
