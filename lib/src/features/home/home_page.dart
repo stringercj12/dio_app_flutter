@@ -1,4 +1,4 @@
-import 'package:dio_app_flutter/src/features/pagina1.dart';
+import 'package:dio_app_flutter/src/features/card_page.dart';
 import 'package:dio_app_flutter/src/features/pagina2.dart';
 import 'package:dio_app_flutter/src/features/pagina3.dart';
 import 'package:dio_app_flutter/src/shared/widgets/custom_drawer.dart';
@@ -19,7 +19,7 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: const Text('Meu app')),
-      drawer: CustomDrawer(),
+      drawer: const CustomDrawer(),
       body: Column(
         children: [
           Expanded(
@@ -31,7 +31,7 @@ class _HomePageState extends State<HomePage> {
                 });
               },
               children: const [
-                Pagina1Page(),
+                CardPage(),
                 Pagina2Page(),
                 Pagina3Page(),
               ],
