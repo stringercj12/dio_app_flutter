@@ -1,6 +1,6 @@
 import 'package:dio_app_flutter/src/features/card_page.dart';
 import 'package:dio_app_flutter/src/features/image_assets.dart';
-import 'package:dio_app_flutter/src/features/pagina3.dart';
+import 'package:dio_app_flutter/src/features/list_view_h.dart';
 import 'package:dio_app_flutter/src/shared/widgets/custom_drawer.dart';
 import 'package:flutter/material.dart';
 
@@ -33,7 +33,7 @@ class _HomePageState extends State<HomePage> {
               children: const [
                 CardPage(),
                 ImageAssetsPage(),
-                Pagina3Page(),
+                ListViewHPage(),
               ],
             ),
           ),
@@ -44,9 +44,17 @@ class _HomePageState extends State<HomePage> {
             currentIndex: posicaoPagina,
             items: const [
               BottomNavigationBarItem(
-                  label: 'Cards', icon: Icon(Icons.card_travel_outlined)),
-              BottomNavigationBarItem(label: 'Images', icon: Icon(Icons.image)),
-              BottomNavigationBarItem(label: 'Pag3', icon: Icon(Icons.person)),
+                label: 'Cards',
+                icon: Icon(Icons.card_travel_outlined),
+              ),
+              BottomNavigationBarItem(
+                label: 'Images',
+                icon: Icon(Icons.image),
+              ),
+              BottomNavigationBarItem(
+                label: 'List',
+                icon: Icon(Icons.list),
+              ),
             ],
           )
         ],
