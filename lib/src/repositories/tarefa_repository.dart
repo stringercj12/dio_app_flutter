@@ -3,7 +3,8 @@ import 'package:dio_app_flutter/src/model/tarefa.dart';
 class TarefaRepository {
   final List<Tarefa> _tarefas = [];
 
-  void adicionar(Tarefa tarefa) {
+  Future<void> adicionar(Tarefa tarefa) async {
+    await Future.delayed(const Duration(seconds: 1));
     _tarefas.add(tarefa);
   }
 

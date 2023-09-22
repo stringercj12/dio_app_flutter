@@ -1,3 +1,4 @@
+import 'package:dio_app_flutter/src/model/tarefa.dart';
 import 'package:dio_app_flutter/src/repositories/tarefa_repository.dart';
 import 'package:flutter/material.dart';
 
@@ -10,7 +11,19 @@ class TarefaPage extends StatefulWidget {
 
 class _TarefaPageState extends State<TarefaPage> {
   var tarefaRepository = TarefaRepository();
+  var _tarefas = const <Tarefa>[];
   var descricaoController = TextEditingController();
+
+  void obterTarefas() async {
+    _tarefas = await tarefaRepository.listarTarefas();
+  }
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    obterTarefas();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -39,6 +52,14 @@ class _TarefaPageState extends State<TarefaPage> {
                   TextButton(
                     onPressed: () {
                       debugPrint(descricaoController.text);
+                      tarefaRepository
+                          .adicionar(Tarefa(descricaoController.text, false));
+                      setState(() {});
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        const SnackBar(
+                          content: Text('Tarefa adicionada'),
+                        ),
+                      );
                       Navigator.pop(context);
                     },
                     child: const Text('Salvar'),
@@ -50,7 +71,13 @@ class _TarefaPageState extends State<TarefaPage> {
         },
         child: const Icon(Icons.add),
       ),
-      body: Container(),
+      body: ListView.builder(
+        itemCount: _tarefas.length,
+        itemBuilder: (BuildContext buildContext, int index) {
+          var tarefa = _tarefas[index];
+          return Text(tarefa.getDescricao());
+        },
+      ),
     );
   }
 }
