@@ -1,14 +1,14 @@
 import 'package:dio_app_flutter/src/shared/app_images.dart';
 import 'package:flutter/material.dart';
 
-class ListViewHPage extends StatefulWidget {
-  const ListViewHPage({super.key});
+class ListViewPage extends StatefulWidget {
+  const ListViewPage({super.key});
 
   @override
-  State<ListViewHPage> createState() => _ListViewHPageState();
+  State<ListViewPage> createState() => _ListViewPageState();
 }
 
-class _ListViewHPageState extends State<ListViewHPage> {
+class _ListViewPageState extends State<ListViewPage> {
   @override
   Widget build(BuildContext context) {
     return ListView(

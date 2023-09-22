@@ -1,6 +1,7 @@
 import 'package:dio_app_flutter/src/features/card_page.dart';
 import 'package:dio_app_flutter/src/features/image_assets.dart';
-import 'package:dio_app_flutter/src/features/list_view_h.dart';
+import 'package:dio_app_flutter/src/features/list_view_horizontal.dart';
+import 'package:dio_app_flutter/src/features/list_view_page.dart';
 import 'package:dio_app_flutter/src/shared/widgets/custom_drawer.dart';
 import 'package:flutter/material.dart';
 
@@ -33,11 +34,13 @@ class _HomePageState extends State<HomePage> {
               children: const [
                 CardPage(),
                 ImageAssetsPage(),
-                ListViewHPage(),
+                ListViewPage(),
+                ListViewHorizontal()
               ],
             ),
           ),
           BottomNavigationBar(
+            type: BottomNavigationBarType.fixed,
             onTap: (value) {
               pageController.jumpToPage(value);
             },
@@ -52,7 +55,11 @@ class _HomePageState extends State<HomePage> {
                 icon: Icon(Icons.image),
               ),
               BottomNavigationBarItem(
-                label: 'List',
+                label: 'List View',
+                icon: Icon(Icons.list_alt),
+              ),
+              BottomNavigationBarItem(
+                label: 'List H',
                 icon: Icon(Icons.list),
               ),
             ],
