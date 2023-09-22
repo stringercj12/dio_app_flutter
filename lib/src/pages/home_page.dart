@@ -1,3 +1,4 @@
+import 'package:dio_app_flutter/src/pages/calc_imc_page.dart';
 import 'package:dio_app_flutter/src/pages/card_page.dart';
 import 'package:dio_app_flutter/src/pages/image_assets.dart';
 import 'package:dio_app_flutter/src/pages/list_view_horizontal.dart';
@@ -37,7 +38,8 @@ class _HomePageState extends State<HomePage> {
                 ImageAssetsPage(),
                 ListViewPage(),
                 ListViewHorizontal(),
-                TarefaPage()
+                TarefaPage(),
+                CalcImcPage()
               ],
             ),
           ),
@@ -67,6 +69,10 @@ class _HomePageState extends State<HomePage> {
               BottomNavigationBarItem(
                 label: 'Tarefas',
                 icon: Icon(Icons.list),
+              ),
+              BottomNavigationBarItem(
+                label: 'IMC',
+                icon: Icon(Icons.calculate),
               ),
             ],
           )
