@@ -67,7 +67,6 @@ class _TarefaPageState extends State<TarefaPage> {
                       ScaffoldMessenger.of(context).showSnackBar(
                         const SnackBar(
                           content: Text('Tarefa adicionada'),
-                          duration: Duration(seconds: 200),
                         ),
                       );
                     },
@@ -107,18 +106,18 @@ class _TarefaPageState extends State<TarefaPage> {
                   var tarefa = _tarefas[index];
                   return Dismissible(
                     onDismissed: (DismissDirection dismissDirection) async {
-                      await tarefaRepository.remover(tarefa.getId());
+                      await tarefaRepository.remover(tarefa.id);
                       obterTarefas();
                     },
-                    key: Key(tarefa.getId()),
+                    key: Key(tarefa.id),
                     child: ListTile(
-                      title: Text(tarefa.getDescricao()),
+                      title: Text(tarefa.descricao),
                       trailing: Switch(
                         onChanged: (bool value) async {
-                          await tarefaRepository.alterar(tarefa.getId(), value);
+                          await tarefaRepository.alterar(tarefa.id, value);
                           obterTarefas();
                         },
-                        value: tarefa.getConcluido(),
+                        value: tarefa.concluido,
                       ),
                     ),
                   );
