@@ -1,4 +1,4 @@
-import 'package:dio_app_flutter/src/features/home/home_page.dart';
+import 'package:dio_app_flutter/src/pages/home_page.dart';
 import 'package:flutter/material.dart';
 
 class LoginPage extends StatefulWidget {

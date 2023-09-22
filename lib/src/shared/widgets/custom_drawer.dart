@@ -1,5 +1,5 @@
-import 'package:dio_app_flutter/src/features/dados_cadastrais/dados_cadastrais_page.dart';
-import 'package:dio_app_flutter/src/features/login/login_page.dart';
+import 'package:dio_app_flutter/src/pages/dados_cadastrais_page.dart';
+import 'package:dio_app_flutter/src/pages/login_page.dart';
 import 'package:flutter/material.dart';
 
 class CustomDrawer extends StatelessWidget {

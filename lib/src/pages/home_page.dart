@@ -1,7 +1,8 @@
-import 'package:dio_app_flutter/src/features/card_page.dart';
-import 'package:dio_app_flutter/src/features/image_assets.dart';
-import 'package:dio_app_flutter/src/features/list_view_horizontal.dart';
-import 'package:dio_app_flutter/src/features/list_view_page.dart';
+import 'package:dio_app_flutter/src/pages/card_page.dart';
+import 'package:dio_app_flutter/src/pages/image_assets.dart';
+import 'package:dio_app_flutter/src/pages/list_view_horizontal.dart';
+import 'package:dio_app_flutter/src/pages/list_view_page.dart';
+import 'package:dio_app_flutter/src/pages/tarefa_page.dart';
 import 'package:dio_app_flutter/src/shared/widgets/custom_drawer.dart';
 import 'package:flutter/material.dart';
 
@@ -35,7 +36,8 @@ class _HomePageState extends State<HomePage> {
                 CardPage(),
                 ImageAssetsPage(),
                 ListViewPage(),
-                ListViewHorizontal()
+                ListViewHorizontal(),
+                TarefaPage()
               ],
             ),
           ),
@@ -60,6 +62,10 @@ class _HomePageState extends State<HomePage> {
               ),
               BottomNavigationBarItem(
                 label: 'List H',
+                icon: Icon(Icons.list_sharp),
+              ),
+              BottomNavigationBarItem(
+                label: 'Tarefas',
                 icon: Icon(Icons.list),
               ),
             ],

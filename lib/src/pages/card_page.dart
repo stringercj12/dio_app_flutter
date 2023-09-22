@@ -1,4 +1,4 @@
-import 'package:dio_app_flutter/src/features/card_detail_page.dart';
+import 'package:dio_app_flutter/src/pages/card_detail_page.dart';
 import 'package:dio_app_flutter/src/model/card_detail.dart';
 import 'package:dio_app_flutter/src/repositories/card_detail_repository.dart';
 import 'package:flutter/material.dart';
