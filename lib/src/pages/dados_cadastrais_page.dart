@@ -1,7 +1,7 @@
 import 'package:dio_app_flutter/src/repositories/linguagens_repository.dart';
 import 'package:dio_app_flutter/src/repositories/nivel_repository.dart';
+import 'package:dio_app_flutter/src/services/app_storage_service.dart';
 import 'package:flutter/material.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 import '../shared/widgets/textlabel_.dart';
 
@@ -26,19 +26,8 @@ class _DadosCadastraisPageState extends State<DadosCadastraisPage> {
   int tempoExperiencia = 0;
 
   bool salvando = false;
-  final String CHAVE_DADOS_CADASTRAIS_NOME = "CHAVE_DADOS_CADASTRAIS_NOME";
-  final String CHAVE_DADOS_CADASTRAIS_DATA_NASCIMENTO =
-      "CHAVE_DADOS_CADASTRAIS_DATA_NASCIMENTO";
-  final String CHAVE_DADOS_CADASTRAIS_TEMPO_EXPERIENCIA =
-      "CHAVE_DADOS_CADASTRAIS_TEMPO_EXPERIENCIA";
-  final String CHAVE_DADOS_CADASTRAIS_NIVEL_EXPERIENCIA =
-      "CHAVE_DADOS_CADASTRAIS_NIVEL_EXPERIENCIA";
-  final String CHAVE_DADOS_CADASTRAIS_LINGUAGENS =
-      "CHAVE_DADOS_CADASTRAIS_LINGUAGENS";
-  final String CHAVE_DADOS_CADASTRAIS_SALARIO =
-      "CHAVE_DADOS_CADASTRAIS_SALARIO";
 
-  late SharedPreferences storage;
+  AppStorageService storage = AppStorageService();
 
   @override
   void initState() {
@@ -49,18 +38,16 @@ class _DadosCadastraisPageState extends State<DadosCadastraisPage> {
   }
 
   carregarDados() async {
-    storage = await SharedPreferences.getInstance();
-    nomeController.text = storage.getString(CHAVE_DADOS_CADASTRAIS_NOME) ?? "";
+    nomeController.text = await storage.dadosCadastraisNome();
     dataNascimentoController.text =
-        storage.getString(CHAVE_DADOS_CADASTRAIS_DATA_NASCIMENTO) ?? "";
-    dataNascimento = DateTime.parse(dataNascimentoController.text);
-    nivelSelecionado =
-        storage.getString(CHAVE_DADOS_CADASTRAIS_NIVEL_EXPERIENCIA) ?? "";
-    linguagensSelecionadas =
-        storage.getStringList(CHAVE_DADOS_CADASTRAIS_LINGUAGENS) ?? [];
-    tempoExperiencia =
-        storage.getInt(CHAVE_DADOS_CADASTRAIS_TEMPO_EXPERIENCIA) ?? 0;
-    salarioEscolhido = storage.getDouble(CHAVE_DADOS_CADASTRAIS_SALARIO) ?? 0;
+        await storage.dadosCadastraisDataNascimento();
+    if (dataNascimentoController.text.isNotEmpty) {
+      dataNascimento = DateTime.parse(dataNascimentoController.text);
+    }
+    nivelSelecionado = await storage.dadosCadastraisNivelExperiencia();
+    linguagensSelecionadas = await storage.dadosCadastraisLinguagens();
+    tempoExperiencia = await storage.dadosCadastraisTempoExperiencia();
+    salarioEscolhido = await storage.dadosCadastraisSalario();
 
     setState(() {});
   }
@@ -237,35 +224,21 @@ class _DadosCadastraisPageState extends State<DadosCadastraisPage> {
                         return;
                       }
 
-                      await storage.setString(
-                        CHAVE_DADOS_CADASTRAIS_NOME,
-                        nomeController.text,
-                      );
+                      await storage.setDadosCadastraisNome(nomeController.text);
 
-                      await storage.setString(
-                        CHAVE_DADOS_CADASTRAIS_DATA_NASCIMENTO,
-                        dataNascimentoController.text,
-                      );
+                      await storage
+                          .setDadosCadastraisDataNascimento(dataNascimento!);
 
-                      await storage.setString(
-                        CHAVE_DADOS_CADASTRAIS_NIVEL_EXPERIENCIA,
-                        nivelSelecionado,
-                      );
+                      await storage
+                          .setDadosCadastraisNivelExperiencia(nivelSelecionado);
 
-                      await storage.setStringList(
-                        CHAVE_DADOS_CADASTRAIS_LINGUAGENS,
-                        linguagensSelecionadas,
-                      );
+                      await storage
+                          .setDadosCadastraisLinguagens(linguagensSelecionadas);
 
-                      await storage.setInt(
-                        CHAVE_DADOS_CADASTRAIS_TEMPO_EXPERIENCIA,
-                        tempoExperiencia,
-                      );
+                      await storage
+                          .setDadosCadastraisTempoExperiencia(tempoExperiencia);
 
-                      await storage.setDouble(
-                        CHAVE_DADOS_CADASTRAIS_SALARIO,
-                        salarioEscolhido,
-                      );
+                      await storage.setDadosCadastraisSalario(salarioEscolhido);
 
                       setState(() {
                         salvando = true;

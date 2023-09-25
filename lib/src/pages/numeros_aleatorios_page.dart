@@ -1,5 +1,6 @@
 import 'dart:math';
 
+import 'package:dio_app_flutter/src/services/app_storage_service.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -13,18 +14,14 @@ class NumerosAleatoriosPage extends StatefulWidget {
 class _NumerosAleatoriosPageState extends State<NumerosAleatoriosPage> {
   int? numeroGerado = 0;
   int? quantidadeDeCliques = 0;
-  final CHAVE_NUMERO_ALEATORIO = "numero_aleatorio";
-  final CHAVE_QUANTIDADE_DE_CLIQUES = "quantidade_de_cliques";
 
-  late SharedPreferences storage;
+  AppStorageService storage = AppStorageService();
 
   void carregarDados() async {
-    storage = await SharedPreferences.getInstance();
+    numeroGerado = await storage.getNumeroAleatorio();
+    quantidadeDeCliques = await storage.getQuantidadeDeCliques();
 
-    setState(() {
-      numeroGerado = storage.getInt(CHAVE_NUMERO_ALEATORIO);
-      quantidadeDeCliques = storage.getInt(CHAVE_QUANTIDADE_DE_CLIQUES);
-    });
+    setState(() {});
     debugPrint(numeroGerado.toString());
   }
 
@@ -69,8 +66,8 @@ class _NumerosAleatoriosPageState extends State<NumerosAleatoriosPage> {
               TextButton(
                 onPressed: () async {
                   // Remove data for the 'counter' key.
-                  await storage.remove(CHAVE_NUMERO_ALEATORIO);
-                  await storage.remove(CHAVE_QUANTIDADE_DE_CLIQUES);
+                  await storage.removeNumerosAletorios();
+                  await storage.removeQuantidadeDeCliques();
                   carregarDados();
                   setState(() {});
                 },
@@ -87,8 +84,8 @@ class _NumerosAleatoriosPageState extends State<NumerosAleatoriosPage> {
               numeroGerado = random.nextInt(1000);
               quantidadeDeCliques = (quantidadeDeCliques ?? 0) + 1;
             });
-            storage.setInt(CHAVE_NUMERO_ALEATORIO, numeroGerado!);
-            storage.setInt(CHAVE_QUANTIDADE_DE_CLIQUES, quantidadeDeCliques!);
+            storage.setNumeroAleatorio(numeroGerado!);
+            storage.setQuantidadeDeCliques(quantidadeDeCliques!);
           },
         ),
       ),
