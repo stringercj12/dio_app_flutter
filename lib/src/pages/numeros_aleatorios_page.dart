@@ -52,7 +52,7 @@ class _NumerosAleatoriosPageState extends State<NumerosAleatoriosPage> {
                     ? 'Nenhum número gerador'
                     : numeroGerado.toString(),
                 style: const TextStyle(
-                  fontSize: 48,
+                  fontSize: 28,
                 ),
               ),
               Text(
@@ -60,8 +60,21 @@ class _NumerosAleatoriosPageState extends State<NumerosAleatoriosPage> {
                     ? 'Nenhum clique efetuado'
                     : quantidadeDeCliques.toString(),
                 style: const TextStyle(
-                  fontSize: 48,
+                  fontSize: 18,
                 ),
+              ),
+              const SizedBox(
+                height: 20,
+              ),
+              TextButton(
+                onPressed: () async {
+                  // Remove data for the 'counter' key.
+                  await storage.remove(CHAVE_NUMERO_ALEATORIO);
+                  await storage.remove(CHAVE_QUANTIDADE_DE_CLIQUES);
+                  carregarDados();
+                  setState(() {});
+                },
+                child: const Text('Limpar'),
               ),
             ],
           ),

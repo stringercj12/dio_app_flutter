@@ -1,3 +1,4 @@
+import 'package:dio_app_flutter/src/pages/configuracoes_page.dart';
 import 'package:dio_app_flutter/src/pages/dados_cadastrais_page.dart';
 import 'package:dio_app_flutter/src/pages/login_page.dart';
 import 'package:dio_app_flutter/src/pages/numeros_aleatorios_page.dart';
@@ -165,7 +166,15 @@ class CustomDrawer extends StatelessWidget {
                 ],
               ),
             ),
-            onTap: () {},
+            onTap: () {
+              Navigator.pop(context);
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (buildContext) => ConfiguracoesPage(),
+                ),
+              );
+            },
           ),
           const Divider(),
           const SizedBox(
