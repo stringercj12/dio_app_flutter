@@ -2,24 +2,30 @@ import 'dart:math';
 
 import 'package:dio_app_flutter/src/services/app_storage_service.dart';
 import 'package:flutter/material.dart';
-import 'package:shared_preferences/shared_preferences.dart';
+import 'package:hive/hive.dart';
 
-class NumerosAleatoriosPage extends StatefulWidget {
-  const NumerosAleatoriosPage({super.key});
+class NumerosAleatoriosHivePage extends StatefulWidget {
+  const NumerosAleatoriosHivePage({super.key});
 
   @override
-  State<NumerosAleatoriosPage> createState() => _NumerosAleatoriosPageState();
+  State<NumerosAleatoriosHivePage> createState() =>
+      _NumerosAleatoriosHivePageState();
 }
 
-class _NumerosAleatoriosPageState extends State<NumerosAleatoriosPage> {
+class _NumerosAleatoriosHivePageState extends State<NumerosAleatoriosHivePage> {
   int? numeroGerado = 0;
   int? quantidadeDeCliques = 0;
 
-  AppStorageService storage = AppStorageService();
+  late Box boxNumerosAleatorios;
 
   void carregarDados() async {
-    numeroGerado = await storage.getNumeroAleatorio();
-    quantidadeDeCliques = await storage.getQuantidadeDeCliques();
+    if (Hive.isBoxOpen("box_numeros_aleatorios")) {
+      boxNumerosAleatorios = Hive.box("box_numeros_aleatorios");
+    } else {
+      boxNumerosAleatorios = await Hive.openBox("box_numeros_aleatorios");
+    }
+    numeroGerado = boxNumerosAleatorios.get('numeroGerado') ?? 0;
+    quantidadeDeCliques = boxNumerosAleatorios.get('quantidadeDeCliques') ?? 0;
 
     setState(() {});
     debugPrint(numeroGerado.toString());
@@ -37,7 +43,7 @@ class _NumerosAleatoriosPageState extends State<NumerosAleatoriosPage> {
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(
-          title: const Text('Gerador de números aleatórios'),
+          title: const Text('Hive - Gerador de números aleatórios'),
         ),
         body: Container(
           alignment: Alignment.center,
@@ -66,8 +72,7 @@ class _NumerosAleatoriosPageState extends State<NumerosAleatoriosPage> {
               TextButton(
                 onPressed: () async {
                   // Remove data for the 'counter' key.
-                  await storage.removeNumerosAletorios();
-                  await storage.removeQuantidadeDeCliques();
+                  await boxNumerosAleatorios.clear();
                   carregarDados();
                   setState(() {});
                 },
@@ -84,8 +89,9 @@ class _NumerosAleatoriosPageState extends State<NumerosAleatoriosPage> {
               numeroGerado = random.nextInt(1000);
               quantidadeDeCliques = (quantidadeDeCliques ?? 0) + 1;
             });
-            storage.setNumeroAleatorio(numeroGerado!);
-            storage.setQuantidadeDeCliques(quantidadeDeCliques!);
+            boxNumerosAleatorios.put('numeroGerado', numeroGerado!);
+            boxNumerosAleatorios.put(
+                'quantidadeDeCliques', quantidadeDeCliques!);
           },
         ),
       ),
