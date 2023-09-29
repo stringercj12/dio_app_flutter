@@ -1,4 +1,6 @@
 import 'package:dio_app_flutter/src/model/tarefa.dart';
+import 'package:dio_app_flutter/src/model/tarefa_sqlite_model.dart';
+import 'package:dio_app_flutter/src/repositories/sqlite/tarefa_sqlite_repository.dart';
 import 'package:dio_app_flutter/src/repositories/tarefa_repository.dart';
 import 'package:flutter/material.dart';
 
@@ -10,17 +12,13 @@ class TarefaPage extends StatefulWidget {
 }
 
 class _TarefaPageState extends State<TarefaPage> {
-  var tarefaRepository = TarefaRepository();
-  var _tarefas = const <Tarefa>[];
+  TarefaSqliteRepository tarefaSqliteRepository = TarefaSqliteRepository();
+  var _tarefas = const <TarefaSqliteModel>[];
   var descricaoController = TextEditingController();
   var apenasNaoConcluidos = false;
 
   void obterTarefas() async {
-    if (apenasNaoConcluidos) {
-      _tarefas = await tarefaRepository.listarNaoConcluida();
-    } else {
-      _tarefas = await tarefaRepository.listarTarefas();
-    }
+    _tarefas = await tarefaSqliteRepository.obterDados(apenasNaoConcluidos);
     setState(() {});
   }
 
@@ -58,8 +56,9 @@ class _TarefaPageState extends State<TarefaPage> {
                   TextButton(
                     onPressed: () {
                       debugPrint(descricaoController.text);
-                      tarefaRepository
-                          .adicionar(Tarefa(descricaoController.text, false));
+                      tarefaSqliteRepository.salvar(
+                        TarefaSqliteModel(0, descricaoController.text, false),
+                      );
                       Navigator.pop(context);
                       setState(() {});
                       obterTarefas();
@@ -106,15 +105,21 @@ class _TarefaPageState extends State<TarefaPage> {
                   var tarefa = _tarefas[index];
                   return Dismissible(
                     onDismissed: (DismissDirection dismissDirection) async {
-                      await tarefaRepository.remover(tarefa.id);
+                      await tarefaSqliteRepository.remover(tarefa.id);
                       obterTarefas();
                     },
-                    key: Key(tarefa.id),
+                    key: Key(tarefa.id.toString()),
                     child: ListTile(
                       title: Text(tarefa.descricao),
                       trailing: Switch(
                         onChanged: (bool value) async {
-                          await tarefaRepository.alterar(tarefa.id, value);
+                          await tarefaSqliteRepository.atualizar(
+                            TarefaSqliteModel(
+                              tarefa.id,
+                              tarefa.descricao,
+                              tarefa.concluido,
+                            ),
+                          );
                           obterTarefas();
                         },
                         value: tarefa.concluido,

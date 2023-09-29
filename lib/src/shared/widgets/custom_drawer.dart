@@ -1,4 +1,5 @@
-import 'package:dio_app_flutter/src/pages/configuracoes_page.dart';
+import 'package:dio_app_flutter/src/pages/configuracoes/configuracoes_hive_page.dart';
+import 'package:dio_app_flutter/src/pages/configuracoes/configuracoes_shared_preferences_page.dart';
 import 'package:dio_app_flutter/src/pages/dados_cadastrais_page.dart';
 import 'package:dio_app_flutter/src/pages/login_page.dart';
 import 'package:dio_app_flutter/src/pages/numeros_aleatorios/numeros_aleatorios_hive_page.dart';
@@ -43,7 +44,7 @@ class CustomDrawer extends StatelessWidget {
                   });
             },
             child: const UserAccountsDrawerHeader(
-              decoration: BoxDecoration(color: Colors.orange),
+              decoration: BoxDecoration(color: Colors.tealAccent),
               currentAccountPicture: CircleAvatar(
                 backgroundColor: Colors.white,
                 backgroundImage: NetworkImage(
@@ -198,7 +199,7 @@ class CustomDrawer extends StatelessWidget {
               Navigator.push(
                 context,
                 MaterialPageRoute(
-                  builder: (buildContext) => ConfiguracoesPage(),
+                  builder: (buildContext) => ConfiguracoesHivePage(),
                 ),
               );
             },

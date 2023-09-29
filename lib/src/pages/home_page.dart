@@ -22,7 +22,7 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: const Text('Meu app')),
-      drawer: const CustomDrawer(),
+      // drawer: const CustomDrawer(),
       body: Column(
         children: [
           Expanded(
@@ -34,12 +34,9 @@ class _HomePageState extends State<HomePage> {
                 });
               },
               children: const [
-                CardPage(),
-                ImageAssetsPage(),
-                ListViewPage(),
                 ListViewHorizontal(),
+                CalcImcPage(),
                 TarefaPage(),
-                CalcImcPage()
               ],
             ),
           ),
@@ -51,28 +48,16 @@ class _HomePageState extends State<HomePage> {
             currentIndex: posicaoPagina,
             items: const [
               BottomNavigationBarItem(
-                label: 'Cards',
-                icon: Icon(Icons.card_travel_outlined),
-              ),
-              BottomNavigationBarItem(
-                label: 'Images',
-                icon: Icon(Icons.image),
-              ),
-              BottomNavigationBarItem(
-                label: 'List View',
-                icon: Icon(Icons.list_alt),
-              ),
-              BottomNavigationBarItem(
                 label: 'List H',
                 icon: Icon(Icons.list_sharp),
               ),
               BottomNavigationBarItem(
-                label: 'Tarefas',
-                icon: Icon(Icons.list),
-              ),
-              BottomNavigationBarItem(
                 label: 'IMC',
                 icon: Icon(Icons.calculate),
+              ),
+              BottomNavigationBarItem(
+                label: 'Tarefas',
+                icon: Icon(Icons.list),
               ),
             ],
           )

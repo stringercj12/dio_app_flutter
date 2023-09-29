@@ -8,6 +8,5 @@ void main() async {
   var documentsDirectory =
       await path_provider.getApplicationDocumentsDirectory();
   Hive.init(documentsDirectory.path);
-
   runApp(const MyApp());
 }
