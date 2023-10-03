@@ -1,9 +1,12 @@
 import 'package:dio_app_flutter/src/pages/configuracoes/configuracoes_hive_page.dart';
 import 'package:dio_app_flutter/src/pages/configuracoes/configuracoes_shared_preferences_page.dart';
 import 'package:dio_app_flutter/src/pages/dados_cadastrais_page.dart';
+import 'package:dio_app_flutter/src/pages/heroes/characters_page.dart';
 import 'package:dio_app_flutter/src/pages/login_page.dart';
 import 'package:dio_app_flutter/src/pages/numeros_aleatorios/numeros_aleatorios_hive_page.dart';
 import 'package:dio_app_flutter/src/pages/numeros_aleatorios/numeros_aleatorios_shared_preferences_page.dart';
+import 'package:dio_app_flutter/src/pages/post_page.dart';
+import 'package:dio_app_flutter/src/repositories/marvel/marvel_repository.dart';
 import 'package:flutter/material.dart';
 
 class CustomDrawer extends StatelessWidget {
@@ -200,6 +203,57 @@ class CustomDrawer extends StatelessWidget {
                 context,
                 MaterialPageRoute(
                   builder: (buildContext) => ConfiguracoesHivePage(),
+                ),
+              );
+            },
+          ),
+          const Divider(),
+          InkWell(
+            child: Container(
+              padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
+              width: double.infinity,
+              child: const Row(
+                children: [
+                  Icon(Icons.post_add),
+                  SizedBox(
+                    width: 5,
+                  ),
+                  Text('Posts'),
+                ],
+              ),
+            ),
+            onTap: () {
+              Navigator.pop(context);
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (buildContext) => const PostsPage(),
+                ),
+              );
+            },
+          ),
+          const Divider(),
+          InkWell(
+            child: Container(
+              padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
+              width: double.infinity,
+              child: const Row(
+                children: [
+                  Icon(Icons.help),
+                  SizedBox(
+                    width: 5,
+                  ),
+                  Text('Herois'),
+                ],
+              ),
+            ),
+            onTap: () {
+              Navigator.pop(context);
+
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (buildContext) => const CharactersPage(),
                 ),
               );
             },

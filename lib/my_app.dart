@@ -18,27 +18,29 @@ class _MyAppState extends State<MyApp> {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: '',
-      home: ZoomDrawer(
-        menuScreen: Builder(
-          builder: (context) {
-            return MenuScreen(
-              onPageChanged: (e) {
-                setState(() {
-                  page = e;
-                });
-                ZoomDrawer.of(context)!.close();
-              },
-            );
-          },
-        ),
-        mainScreen: page,
-        borderRadius: 24.8,
-        menuBackgroundColor: Colors.indigo,
-        showShadow: true,
-      ),
+      home: HomePage(),
     );
   }
 }
+
+// ZoomDrawer(
+//         menuScreen: Builder(
+//           builder: (context) {
+//             return MenuScreen(
+//               onPageChanged: (e) {
+//                 setState(() {
+//                   page = e;
+//                 });
+//                 ZoomDrawer.of(context)!.close();
+//               },
+//             );
+//           },
+//         ),
+//         mainScreen: page,
+//         borderRadius: 24.8,
+//         menuBackgroundColor: Colors.indigo,
+//         showShadow: true,
+//       ),
 
 class HomePage extends StatelessWidget {
   HomePage({super.key});

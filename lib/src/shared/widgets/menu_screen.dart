@@ -1,4 +1,6 @@
 import 'package:dio_app_flutter/my_app.dart';
+import 'package:dio_app_flutter/src/pages/post_page.dart';
+import 'package:dio_app_flutter/src/pages/teste_http.dart';
 import 'package:flutter/material.dart';
 
 class MenuScreen extends StatelessWidget {
@@ -16,6 +18,16 @@ class MenuScreen extends StatelessWidget {
       icon: const Icon(Icons.home),
       title: const Text('Reserva'),
       page: HomePage(),
+    ),
+    ListItems(
+      icon: const Icon(Icons.get_app_rounded),
+      title: const Text('HTTP'),
+      page: const TesteHttpPage(),
+    ),
+    ListItems(
+      icon: const Icon(Icons.get_app_rounded),
+      title: const Text('Posts'),
+      page: const PostsPage(),
     ),
   ];
 
