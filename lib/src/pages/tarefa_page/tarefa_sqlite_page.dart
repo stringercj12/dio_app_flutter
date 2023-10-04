@@ -4,14 +4,14 @@ import 'package:dio_app_flutter/src/repositories/sqlite/tarefa_sqlite_repository
 import 'package:dio_app_flutter/src/repositories/tarefa_repository.dart';
 import 'package:flutter/material.dart';
 
-class TarefaPage extends StatefulWidget {
-  const TarefaPage({Key? key}) : super(key: key);
+class TarefaSqlitePage extends StatefulWidget {
+  const TarefaSqlitePage({Key? key}) : super(key: key);
 
   @override
-  _TarefaPageState createState() => _TarefaPageState();
+  _TarefaSqlitePageState createState() => _TarefaSqlitePageState();
 }
 
-class _TarefaPageState extends State<TarefaPage> {
+class _TarefaSqlitePageState extends State<TarefaSqlitePage> {
   TarefaSqliteRepository tarefaSqliteRepository = TarefaSqliteRepository();
   var _tarefas = const <TarefaSqliteModel>[];
   var descricaoController = TextEditingController();

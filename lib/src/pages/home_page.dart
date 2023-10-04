@@ -3,7 +3,7 @@ import 'package:dio_app_flutter/src/pages/card_page.dart';
 import 'package:dio_app_flutter/src/pages/image_assets.dart';
 import 'package:dio_app_flutter/src/pages/list_view_horizontal.dart';
 import 'package:dio_app_flutter/src/pages/list_view_page.dart';
-import 'package:dio_app_flutter/src/pages/tarefa_page.dart';
+import 'package:dio_app_flutter/src/pages/tarefa_page/tarefa_sqlite_page.dart';
 import 'package:dio_app_flutter/src/shared/widgets/custom_drawer.dart';
 import 'package:flutter/material.dart';
 
@@ -36,7 +36,7 @@ class _HomePageState extends State<HomePage> {
               children: const [
                 ListViewHorizontal(),
                 CalcImcPage(),
-                TarefaPage(),
+                TarefaSqlitePage(),
               ],
             ),
           ),

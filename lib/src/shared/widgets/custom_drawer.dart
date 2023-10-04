@@ -6,6 +6,7 @@ import 'package:dio_app_flutter/src/pages/login_page.dart';
 import 'package:dio_app_flutter/src/pages/numeros_aleatorios/numeros_aleatorios_hive_page.dart';
 import 'package:dio_app_flutter/src/pages/numeros_aleatorios/numeros_aleatorios_shared_preferences_page.dart';
 import 'package:dio_app_flutter/src/pages/post_page.dart';
+import 'package:dio_app_flutter/src/pages/tarefa_page/TarefaBack4appPage.dart';
 import 'package:dio_app_flutter/src/repositories/marvel/marvel_repository.dart';
 import 'package:flutter/material.dart';
 
@@ -15,8 +16,7 @@ class CustomDrawer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Drawer(
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
+      child: ListView(
         children: [
           InkWell(
             onTap: () {
@@ -152,7 +152,7 @@ class CustomDrawer extends StatelessWidget {
                 context,
                 MaterialPageRoute(
                   builder: (buildContext) =>
-                      NumerosAleatoriosSharedPreferencesPage(),
+                      const NumerosAleatoriosSharedPreferencesPage(),
                 ),
               );
             },
@@ -177,7 +177,7 @@ class CustomDrawer extends StatelessWidget {
               Navigator.push(
                 context,
                 MaterialPageRoute(
-                  builder: (buildContext) => NumerosAleatoriosHivePage(),
+                  builder: (buildContext) => const NumerosAleatoriosHivePage(),
                 ),
               );
             },
@@ -202,7 +202,7 @@ class CustomDrawer extends StatelessWidget {
               Navigator.push(
                 context,
                 MaterialPageRoute(
-                  builder: (buildContext) => ConfiguracoesHivePage(),
+                  builder: (buildContext) => const ConfiguracoesHivePage(),
                 ),
               );
             },
@@ -259,9 +259,32 @@ class CustomDrawer extends StatelessWidget {
             },
           ),
           const Divider(),
-          const SizedBox(
-            height: 10,
+          InkWell(
+            child: Container(
+              padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
+              width: double.infinity,
+              child: const Row(
+                children: [
+                  Icon(Icons.help),
+                  SizedBox(
+                    width: 5,
+                  ),
+                  Text('Tarefas HTTP'),
+                ],
+              ),
+            ),
+            onTap: () {
+              Navigator.pop(context);
+
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (buildContext) => const TarefaBack4AppPage(),
+                ),
+              );
+            },
           ),
+          const Divider(),
           InkWell(
             child: Container(
               padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
